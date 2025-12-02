@@ -10,21 +10,21 @@ def halves(num)
     [num.slice(0, size).to_i, num.slice(size, size).to_i]
 end
 
-def map_to(num)
-    left, right = halves(num)
-    if right >= left
-        left
-    else
-        left - 1
-    end
-end
-
 def map_from(num)
     left, right = halves(num)
     if right > left
         left + 1
     else
         left
+    end
+end
+
+def map_to(num)
+    left, right = halves(num)
+    if right >= left
+        left
+    else
+        left - 1
     end
 end
 
