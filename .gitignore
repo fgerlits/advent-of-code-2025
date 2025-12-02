@@ -1,5 +1,4 @@
-input
-input.sample*
+input*
 .*.swp
 Cargo.lock
 target
