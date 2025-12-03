@@ -5,15 +5,14 @@ def parse(line)
 end
 
 def max_joltage(bank)
-    max = 0
-    maxes = bank.reverse.map{|n| max = [n, max].max}.reverse
+    maxes = [0] * bank.size + [0]
     multiplier = 1
-    2.upto(12) do |num_batteries|
+    1.upto(12) do |num_batteries|
         max = 0
-        multiplier *= 10
         maxes = (bank.size - num_batteries).downto(0).map do |i|
             max = [multiplier * bank[i] + maxes[i + 1], max].max
         end.reverse
+        multiplier *= 10
     end
     maxes[0]
 end
