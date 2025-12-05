@@ -1,9 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative '../util/enumerable'
-
 class Interval
-    include Comparable
     attr_reader :left, :right
 
     def initialize(left, right)
@@ -11,21 +8,20 @@ class Interval
         @left, @right = left, right
     end
 
-    def <=>(other) = [@left, @right] <=> [other.left, other.right]
-
     def size = @right - @left + 1
 end
 
 def parse_interval(line)
-    line =~ /(.*)-(.*)/
-    Interval.new($1.to_i, $2.to_i)
+    if line =~ /(.*)-(.*)/
+        Interval.new($1.to_i, $2.to_i)
+    end
 end
 
 def parse(stream)
-    stream.readlines.map(&:chomp).split('')[0].map{|line| parse_interval(line)}
+    stream.readlines.map(&:chomp).map{|line| parse_interval(line)}.compact
 end
 
-ranges = parse(ARGF).sort
+ranges = parse(ARGF).sort_by(&:left)
 disjoint_ranges = []
 current = nil
 ranges.each do |range|
