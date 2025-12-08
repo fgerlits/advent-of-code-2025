@@ -25,14 +25,18 @@ def parse(stream)
 end
 
 def distance_squared(p, q)
-    p.zip(q).map{|a, b| (a - b) ** 2}.sum
+    (p[0] - q[0])**2 + (p[1] - q[1])**2 + (p[2] - q[2])**2
 end
 
 def compute_distances(points)
+    result = []
     n = points.size
-    (0...n).flat_map do |i|
-        (i+1...n).map do |j|
-            [distance_squared(points[i], points[j]), i, j]
+    (0...n).each do |i|
+        p = points[i]
+        (i+1...n).each do |j|
+            q = points[j]
+            result << [distance_squared(p, q), i, j]
         end
     end
+    result
 end
