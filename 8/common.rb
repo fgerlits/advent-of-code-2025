@@ -11,8 +11,12 @@ class Partition
         end
     end
 
-    def sizes()
+    def sizes
         @leaders.group_by(&:itself).map{|_, group| group.size}
+    end
+
+    def single_blob?
+        @leaders.all?{|x| x == 0}
     end
 end
 
