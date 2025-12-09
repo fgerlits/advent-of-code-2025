@@ -25,7 +25,8 @@ def parse(stream)
 end
 
 def distance_squared(p, q)
-    p.zip(q).map{|a, b| (a - b) ** 2}.sum
+    a, b, c = p[0] - q[0], p[1] - q[1], p[2] - q[2]
+    a * a + b * b + c * c
 end
 
 def compute_distances(points)
